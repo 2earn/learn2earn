@@ -18,7 +18,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\MessageBag;
 use Illuminate\Validation\ValidationException;
 
 class RegisterController extends Controller
@@ -90,10 +89,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         $registerMethod = getGeneralSettings('register_method') ?? 'mobile';
-
         if (!empty($data['mobile']) and !empty($data['country_code'])) {
             $data['mobile'] = ltrim($data['country_code'], '+') . ltrim($data['mobile'], '0');
         }
+
 
         $rules = [
             'country_code' => ($registerMethod == 'mobile') ? 'required' : 'nullable',
@@ -109,7 +108,6 @@ class RegisterController extends Controller
         if (!empty(getGeneralSecuritySettings('captcha_for_register'))) {
             $rules['captcha'] = 'required|captcha';
         }
-
         return Validator::make($data, $rules, [], [
             'mobile' => trans('auth.mobile'),
             'email' => trans('auth.email'),
@@ -188,7 +186,6 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $validate = $this->validator($request->all());
-
         if ($validate->fails()) {
             $errors = $validate->errors();
 

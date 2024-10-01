@@ -30,7 +30,7 @@ storage/framework/views/*
 public/uploads/*
 public/store/*
 
-
+storage/framework/cache/*
 
 .idea/*
 .idea/2earn.iml

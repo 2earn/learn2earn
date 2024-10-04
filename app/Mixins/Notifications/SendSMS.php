@@ -14,6 +14,7 @@ class SendSMS
     protected $to;
     protected $content;
 
+    const KAVENEGAR = 'KAVENEGAR';
     const TWILIO = 'twilio';
     const MSEGAT = 'msegat';
     const VONAGE = 'vonage';

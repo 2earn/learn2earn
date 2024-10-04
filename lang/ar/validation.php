@@ -92,6 +92,7 @@ return [
     'numeric' => ':attribute must be a number.',
     'password' => 'كلمة المرور غير صحيحة.',
     'password_or_username' => 'كلمة المرور أو اسم المستخدم غير صحيح.',
+    'trainers_only' => 'هذه الخدمة متاحة حاليًا للمدربين فقط',
     'present' => ':attribute يجب أن يكون الحقل موجودا.',
     'regex' => ':attribute تنسيق غير مقبولة.',
     'required' => ':attribute الحقل مطلوب.',

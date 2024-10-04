@@ -92,6 +92,7 @@ return [
     'numeric' => 'The :attribute must be a number.',
     'password' => 'The password is incorrect.',
     'password_or_username' => 'The password or username is incorrect.',
+    'trainers_only' => 'This service is currently available to you trainers',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
     'required' => 'The :attribute field is required.',

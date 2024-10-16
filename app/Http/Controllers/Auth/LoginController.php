@@ -7,10 +7,10 @@ use App\Http\Controllers\Web\CartManagerController;
 use App\Mixins\Logs\UserLoginHistoryMixin;
 use App\Models\Reward;
 use App\Models\RewardAccounting;
+use App\Models\Role;
 use App\Models\UserSession;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -101,9 +101,16 @@ class LoginController extends Controller
                 return back()->withErrors($errors)->withInput($request->all());
             }
         }
-
         if ($this->attemptLogin($request)) {
-            return $this->afterLogged($request);
+            $user = auth()->user();
+
+            if ($user->role_name == Role::$teacher) {
+                return $this->afterLogged($request);
+            } else {
+                throw ValidationException::withMessages([
+                    $this->getUsername($request) => [trans('validation.trainers_only')],
+                ]);
+            }
         }
 
         return $this->sendFailedLoginResponse($request);

@@ -2621,11 +2621,7 @@ function convertToMB($size, $unit = 'B')
 
 function checkMobileNumber($phoneNumber)
 {
-    if (preg_match('/^\+\d{12}$/', $phoneNumber)) {
-        return true;
-    }
-
-    return false;
+    return true;
 }
 
 function canDeleteContentDirectly()

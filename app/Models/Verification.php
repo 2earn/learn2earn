@@ -25,11 +25,17 @@ class Verification extends Model
 
     public function sendEmailCode()
     {
-        $this->notify(new SendVerificationEmailCode($this));
+        try {
+            $this->notify(new SendVerificationEmailCode($this));
+        } catch (\Exception $exception) {
+        }
     }
 
     public function sendSMSCode()
     {
-        $this->notify(new SendVerificationSMSCode($this));
+        try {
+            $this->notify(new SendVerificationSMSCode($this));
+        } catch (\Exception $exception) {
+        }
     }
 }

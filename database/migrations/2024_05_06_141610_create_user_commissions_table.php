@@ -12,17 +12,19 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('user_commissions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->integer('user_group_id')->unsigned()->nullable();
-            $table->enum('source', \App\Models\UserCommission::$sources);
-            $table->enum('type', ['percent', 'fixed_amount']);
-            $table->float('value', 15, 2)->nullable();
+        if (!Schema::hasTable('user_commissions')) {
+            Schema::create('user_commissions', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('user_id')->unsigned()->nullable();
+                $table->integer('user_group_id')->unsigned()->nullable();
+                $table->enum('source', \App\Models\UserCommission::$sources);
+                $table->enum('type', ['percent', 'fixed_amount']);
+                $table->float('value', 15, 2)->nullable();
 
-            $table->foreign('user_id')->on('users')->references('id')->cascadeOnDelete();
-            $table->foreign('user_group_id')->on('groups')->references('id')->cascadeOnDelete();
-        });
+                $table->foreign('user_id')->on('users')->references('id')->cascadeOnDelete();
+                $table->foreign('user_group_id')->on('groups')->references('id')->cascadeOnDelete();
+            });
+        }
     }
 
     /**
